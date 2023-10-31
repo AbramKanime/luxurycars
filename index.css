@@ -65,13 +65,35 @@ footer {
 
 .car-tile {
     width: 90%;
-    margin: 5px auto;
+    margin: 20px auto;
 }
 
 .car-tile img {
     max-width: 100%;
     border-radius: 5px;
 }
+
+.car-info h3, .car-info p, .car-info i {
+    margin: 5px 0;
+}
+
+.car-type {
+    height: 34px;
+    padding: 6px 26px;
+    font-style: normal;
+    font-weight: 500;
+    border: none;
+    border-radius: 5px;
+    background-color: #ffead0;
+    color: #4d4d4d;
+    margin-top: 10px;
+    /* transition: 200ms all cubic-bezier(0.4, 0, 0.2, 1); */
+}
+
+/* .car-tile a {
+    color: #161616;
+    text-decoration: none;
+} */
 
 .site-wrapper {
     min-height: 100vh;

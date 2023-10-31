@@ -5,6 +5,7 @@ import { fetchCarsFromDB } from "../api"
 export default function Home() {
   const [cars, setCars] = useState([])
   const [loading, setLoading] = useState(false)
+  const [error, setError] = React.useState(null)
 
   useEffect(() => {
     async function loadCars() {
@@ -17,7 +18,7 @@ export default function Home() {
         }
         setCars(featuredCars)
       } catch (error) {
-        console.error(error)
+        setError(error.message)
       } finally {
         setLoading(false)
       }
@@ -29,16 +30,21 @@ export default function Home() {
     <div key={car.id} className="car-tile">
       <Link
           to="cars"
+          className="car-container"
       >
           <img src={car.image} />
           <div className="car-info">
               <h3>{car.name}</h3>
-              <p>${car.price}<span>/day</span></p>
+              <p>${car.price}</p>
           </div>
-          <i className={`car-type ${car.type} selected`}>{car.type}</i>
+          <i className={`car-type ${car.type}`}>{car.type}</i>
       </Link>
     </div>
   ))
+
+  const featuredCars = loading ? <h1>Loading cars...</h1>
+  : error ? <h1>There was an error: {error.message}</h1>
+  : carsElement
 
   return (
     <main>
@@ -48,10 +54,10 @@ export default function Home() {
               Our curated collection of premium vehicles represents the epitome of style, power, and prestige. 
               Whether you're a connoisseur of luxury automobiles or embarking on your first journey into 
               the world of opulence, you've arrived at the right destination.</p>
-            <Link to="cars">Explore</Link>
         </section>
         <section className="featured-cars-section">
-            {carsElement}
+            {featuredCars}
+            <Link to="cars">Explore</Link>
         </section>
     </main>
   )
