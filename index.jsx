@@ -3,7 +3,8 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route, Link, Outlet } from "react-router-dom"
 import Layout from "./components/Layout"
 import Home from "./pages/Home"
-import Cars from "./pages/Cars"
+import Cars from "./pages/cars/Cars"
+import CarDetail from "./pages/cars/CarDetail"
 import About from "./pages/About"
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="about" element={<About />} />
           <Route path="cars" element={<Cars />} />
+          <Route path="cars/:id" element={<CarDetail />} />
         </Route>
       </Routes>
     </BrowserRouter>

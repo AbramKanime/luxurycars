@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app"
-import { getFirestore, onSnapshot, collection, getDocs } from "firebase/firestore"
+import { getFirestore, onSnapshot, collection, getDocs, query, where } from "firebase/firestore"
 
 const firebaseConfig = {
   apiKey: "AIzaSyBl4QLRAj0YwANlBbG7igCmUrFo7mlsZV4",
@@ -21,4 +21,16 @@ export async function fetchCarsFromDB(query, user) {
       ...doc.data(), id: doc.id
   }))
   return cars
+}
+
+export async function fetchCar(id) {
+  // const q = query(carsRef, where(doc.id, "==", id))
+  const snapshot = await getDocs(carsRef)
+  const selectedCar = snapshot.docs.filter(doc => id === doc.id)
+
+  const car = selectedCar.map(doc => ({
+    ...doc.data(), id: doc.id
+  }))
+  
+  return car
 }

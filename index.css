@@ -77,17 +77,25 @@ footer {
     margin: 5px 0;
 }
 
-.car-type {
-    height: 34px;
+.car-type, .car-color {
+    height: 30px;
     padding: 6px 26px;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 600;
     border: none;
     border-radius: 5px;
     background-color: #ffead0;
     color: #4d4d4d;
-    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    margin: 0;
     /* transition: 200ms all cubic-bezier(0.4, 0, 0.2, 1); */
+}
+
+.car-type-color-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 /* .car-tile a {
