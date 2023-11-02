@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { Link, useParams } from "react-router-dom"
-import { fetchCar } from "../../api"
+import { fetchCar } from "../../firebase"
 
 
 export default function CarDetail() {
@@ -23,7 +23,6 @@ export default function CarDetail() {
         }
         loadCar()
     }, [])
-    console.log(car)
 
     if (loading) {
         return <h1>Loading...</h1>
@@ -35,7 +34,7 @@ export default function CarDetail() {
 
     return (
         <main>
-            <div className="van-detail-container">
+            <div className="car-detail-container">
                 <Link
                     to=".."
                     relative="path"
@@ -43,13 +42,14 @@ export default function CarDetail() {
                 >&larr; <span>Back to cars</span></Link>
                 
                 {car && (
-                    <div className="van-detail">
+                    <div className="car-detail">
                         <img src={car.image} />
-                        <i className={`van-type ${car.type} selected`}>
-                            {car.type}
-                        </i>
+                        <div className="car-type-color-div">
+                            <p className={`car-type ${car.type}`}>{car.type}</p>
+                            <p className="car-color">Color: {car.color}</p>
+                        </div>
                         <h2>{car.name}</h2>
-                        <p className="van-price">${car.price}</p>
+                        <p className="car-price">Price: ${car.price}</p>
                         <p>{car.detail}</p>
                         <button className="link-button">Buy this car</button>
                     </div>

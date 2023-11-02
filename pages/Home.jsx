@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import {Link} from "react-router-dom"
-import { fetchCarsFromDB } from "../api"
+import { fetchCarsFromDB } from "../firebase"
+import { createCarsElement } from "../utilities/createCarsElement"
 
 export default function Home() {
   const [cars, setCars] = useState([])
@@ -26,24 +27,7 @@ export default function Home() {
     loadCars()
   }, [])
 
-  const carsElement = cars.map(car => (
-    <div key={car.id} className="car-tile">
-      <Link
-          to={car.id}
-          className="car-container"
-      >
-          <img src={car.image} />
-          <div className="car-info">
-              <h3>{car.name}</h3>
-              <p>${car.price}</p>
-          </div>
-          <div className="car-type-color-div">
-            <p className={`car-type ${car.type}`}>{car.type}</p>
-            <p className="car-color">Color: {car.color}</p>
-          </div>
-      </Link>
-    </div>
-  ))
+  const carsElement = createCarsElement(cars)
 
   const featuredCars = loading ? <h3>Loading featured cars...</h3>
   : error ? <h3>There was an error: {error.message}</h3>
