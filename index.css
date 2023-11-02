@@ -170,3 +170,67 @@ footer {
     color: white;
     font-size: 1.125rem;
 }
+
+.filter-text {
+    margin-left: 8px;
+}
+
+.car-list-filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 0 8px;
+}
+
+.car-list-filter-buttons button {
+    cursor: pointer;
+}
+
+.car-type {
+    height: 34px;
+    padding: 6px 20px;
+    font-style: normal;
+    font-weight: 500;
+    border: none;
+    border-radius: 5px;
+    background-color: #FFEAD0;
+    color: #4D4D4D;
+    transition: 200ms all cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.car-type:hover {
+    color: #FFEAD0;
+}
+
+.car-type:focus {
+    outline: none;
+}
+
+.car-type.selected {
+    color: #FFEAD0;
+}
+
+.car-type.sport:hover, .car-type.sport.selected {
+    background-color: #E17654;
+}
+
+.car-type.suv:hover, .car-type.suv.selected {
+    background-color: #115E59;
+}
+
+.car-type.salon:hover, .car-type.salon.selected {
+    background-color: #161616;
+}
+
+.car-type.clear-filters {
+    margin-left: -20px;
+    height: 34px;
+    padding: 6px 26px;
+    font-style: normal;
+    font-weight: 500;
+    border: none;
+    border-radius: 5px;
+    text-decoration: underline;
+    background-color: transparent;
+    color: #4D4D4D;
+}

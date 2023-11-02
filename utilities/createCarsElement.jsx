@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom"
 
-export function createCarElement(cars) {
+export function createCarsElement(cars, path="") {
     const carsElement = cars.map(car => (
         <div key={car.id} className="car-tile">
           <Link
-              to={car.id}
+              to={`${path}${car.id}`}
               className="car-container"
           >
               <img src={car.image} />
@@ -13,7 +13,7 @@ export function createCarElement(cars) {
                   <p>${car.price}</p>
               </div>
               <div className="car-type-color-div">
-                <p className={`car-type ${car.type}`}>{car.type}</p>
+                <p className={`car-type ${car.type} selected`}>{car.type}</p>
                 <p className="car-color">Color: {car.color}</p>
               </div>
           </Link>

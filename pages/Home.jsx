@@ -27,7 +27,7 @@ export default function Home() {
     loadCars()
   }, [])
 
-  const carsElement = createCarsElement(cars)
+  const carsElement = createCarsElement(cars, 'cars/')
 
   const featuredCars = loading ? <h3>Loading featured cars...</h3>
   : error ? <h3>There was an error: {error.message}</h3>
@@ -36,15 +36,15 @@ export default function Home() {
   return (
     <main>
         <section className="home-container">
-            <h1>Unleash Luxury, Embrace Elegance: Your Journey Begins Here!</h1>
+          <h1>Unleash Luxury, Embrace Elegance: Your Journey Begins Here!</h1>
             <p>At LuxuryCars, we invite you to explore a world of automotive excellence where sophistication meets innovation. 
               Our curated collection of premium vehicles represents the epitome of style, power, and prestige. 
               Whether you're a connoisseur of luxury automobiles or embarking on your first journey into 
               the world of opulence, you've arrived at the right destination.</p>
         </section>
         <section className="featured-cars-section">
-            {featuredCars}
-            <Link to="cars">Explore</Link>
+          {featuredCars}
+          <Link to="cars">Explore</Link>
         </section>
     </main>
   )
