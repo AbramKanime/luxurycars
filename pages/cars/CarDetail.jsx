@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { Link, useParams } from "react-router-dom"
+import { useParams, Link, Outlet, NavLink } from "react-router-dom"
 import { fetchCar } from "../../firebase"
 
 
@@ -32,6 +32,12 @@ export default function CarDetail() {
         return <h1>There was an error!</h1>
     }
 
+    const activeStyles = {
+        fontWeight: "bold",
+        textDecoration: "underline",
+        color: "#161616"
+    }
+
     return (
         <main>
             <div className="car-detail-container">
@@ -40,20 +46,26 @@ export default function CarDetail() {
                     relative="path"
                     className="back-button"
                 >&larr; <span>Back to cars</span></Link>
-                
-                {car && (
-                    <div className="car-detail">
-                        <img src={car.image} />
-                        <div className="car-type-color-div">
-                            <p className={`car-type ${car.type}`}>{car.type}</p>
-                            <p className="car-color">Color: {car.color}</p>
-                        </div>
-                        <h2>{car.name}</h2>
-                        <p className="car-price">Price: ${car.price}</p>
-                        <p>{car.detail}</p>
-                        <button className="link-button">Buy this car</button>
-                    </div>
-                )}
+
+                <nav className="car-detail-nav">
+                    {car && <img src={car.image} />}
+                    <NavLink
+                        to="."
+                        end
+                        style={({ isActive }) => isActive ? activeStyles : null}
+                    >
+                        Details
+                    </NavLink>
+                    <NavLink
+                        to="photos"
+                        style={({ isActive }) => isActive ? activeStyles : null}
+                    >
+                        Photos
+                    </NavLink>
+                </nav>
+
+                <Outlet context={{car}} />
+                <button className="link-button">Buy this car</button>
             </div>
         </main>
     )

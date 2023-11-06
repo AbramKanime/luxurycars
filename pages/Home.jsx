@@ -43,6 +43,7 @@ export default function Home() {
               the world of opulence, you've arrived at the right destination.</p>
         </section>
         <section className="featured-cars-section">
+          <p className="title">Featured cars</p>
           {featuredCars}
           <Link to="cars">Explore</Link>
         </section>

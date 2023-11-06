@@ -41,23 +41,25 @@ export default function Cars() {
       <div className="car-list-filter-buttons">
         <button 
             onClick={() => setSearchParams({type: "sport"})}
-            className="car-type sport"
+            className={`car-type sport ${typeFilter === "sport" ? "selected" : ""}`}
         >Sport</button>
         <button 
             onClick={() => setSearchParams({type: "suv"})}
-            className="car-type suv"
+            className={`car-type suv ${typeFilter === "suv" ? "selected" : ""}`}
         >SUV</button>
         <button 
             onClick={() => setSearchParams({type: "salon"})}
-            className="car-type salon"
+            className={`car-type salon ${typeFilter === "salon" ? "selected" : ""}`}
         >Salon</button>
-        <button 
+        {typeFilter && <button 
             onClick={() => setSearchParams({})}
             className="car-type clear-filters"
-        >Clear filter</button>
+        >Clear filter</button>}
       
       </div>
-      {allCars}
+      <div className="car-list-container">
+        {allCars}
+      </div>
     </main>
   )
 }
