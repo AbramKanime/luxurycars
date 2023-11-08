@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { useSearchParams } from "react-router-dom"
 import { fetchCarsFromDB } from "../../firebase"
-import { createCarsElement } from "../../utilities/createCarsElement"
+import { CreateCarsElement } from "../../utilities/CreateCarsElement"
 
 export default function Cars() {
   const [cars, setCars] = useState([])
@@ -29,7 +29,7 @@ export default function Cars() {
   const displayedCars = typeFilter ? cars.filter(car => car.type === typeFilter)
                         : cars
 
-  const carsElement = createCarsElement(displayedCars)
+  const carsElement = CreateCarsElement(displayedCars)
 
   const allCars = loading ? <h3>Loading cars...</h3>
   : error ? <h3>Failed to load cars...</h3>

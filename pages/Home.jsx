@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import {Link} from "react-router-dom"
 import { fetchCarsFromDB } from "../firebase"
-import { createCarsElement } from "../utilities/createCarsElement"
+import { CreateCarsElement } from "../utilities/CreateCarsElement"
 
 export default function Home() {
   const [cars, setCars] = useState([])
@@ -27,7 +27,7 @@ export default function Home() {
     loadCars()
   }, [])
 
-  const carsElement = createCarsElement(cars, 'cars/')
+  const carsElement = CreateCarsElement(cars, 'cars/')
 
   const featuredCars = loading ? <h3>Loading featured cars...</h3>
   : error ? <h3>There was an error: {error.message}</h3>
