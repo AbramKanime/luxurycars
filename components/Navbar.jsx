@@ -34,10 +34,10 @@ export default function Navbar() {
                         About
                     </NavLink>
                     <NavLink 
-                        to="/myaccount"
+                        to="/orders"
                         className={({isActive}) => isActive ? "active-link" : ""}
                     >
-                        My Account
+                        My Orders
                     </NavLink>
                     <NavLink 
                         to="/cars"

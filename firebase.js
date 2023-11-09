@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app"
-import { getFirestore, onSnapshot, collection, getDocs } from "firebase/firestore"
+import { getFirestore, addDoc, collection, getDocs } from "firebase/firestore"
 import { getAuth, createUserWithEmailAndPassword,
         signInWithEmailAndPassword, updateProfile, onAuthStateChanged,
         signOut } from "firebase/auth"
@@ -37,6 +37,20 @@ export async function fetchCar(id) {
   }))
   
   return car
+}
+
+export async function addCarToDB(name, color, price, user) {
+  try {
+      const docRef = await addDoc(collection(db, "orderedCars"), {
+          name,
+          color,
+          price,
+          uid: user.uid
+      })
+  } catch (error) {
+      console.error(error.message)
+  }
+
 }
 
 export function authCreateAccountWithEmail(email, password, firstName, lastName, navigate, from) {

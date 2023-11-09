@@ -1,7 +1,19 @@
 import React, { useState, useEffect } from "react"
 import { useParams, Link, Outlet, NavLink } from "react-router-dom"
-import { fetchCar } from "../../firebase"
+import { fetchCar, addCarToDB } from "../../firebase"
+import { onAuthStateChanged, getAuth } from "firebase/auth"
 
+const auth = getAuth()
+ 
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    // const uid = user.uid
+    // ...
+  } else {
+    // User is signed out
+    // ...
+  }
+})
 
 export default function CarDetail() {
     const [car, setCar] = useState(null)
@@ -23,6 +35,14 @@ export default function CarDetail() {
         }
         loadCar()
     }, [])
+
+    function orderCar() {
+        const user = auth.currentUser
+        const {name, color, price} = car
+        addCarToDB(name, color, price, user)
+        console.log(user.uid)
+        console.log(car)
+    }
 
     if (loading) {
         return <h1>Loading...</h1>
@@ -65,7 +85,7 @@ export default function CarDetail() {
                 </nav>
 
                 <Outlet context={{car}} />
-                <button className="link-button">Buy this car</button>
+                <button onClick={orderCar} className="link-button">Order this car</button>
             </div>
         </main>
     )

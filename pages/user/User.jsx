@@ -13,8 +13,6 @@ onAuthStateChanged(auth, (user) => {
   } else {
     // User is signed out
     // ...
-    const navigate = useNavigate()
-    navigate("/myaccount", { replace: true })
   }
 })
 
@@ -32,7 +30,7 @@ export default function User() {
     return (
         <div>
             <h1>{name} logged in</h1>
-            <button onClick={authSignOut}>X</button>
+            <button onClick={authSignOut}>Sign out</button>
         </div>
     )
 }
