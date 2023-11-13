@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app"
-import { getFirestore, addDoc, collection, getDocs } from "firebase/firestore"
+import { getFirestore, addDoc, collection, getDocs, onSnapshot } from "firebase/firestore"
 import { getAuth, createUserWithEmailAndPassword,
         signInWithEmailAndPassword, updateProfile, onAuthStateChanged,
         signOut } from "firebase/auth"
@@ -13,13 +13,14 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig)
 const db = getFirestore(app)
-const auth = getAuth(app)
+export const auth = getAuth(app)
 
 const carsRef = collection(db, "cars")
+const orderedCarsRef = collection(db, "orderedCars")
 const snapshot = await getDocs(carsRef)
 
+
 export async function fetchCarsFromDB() {
-  // const snapshot = await getDocs(carsRef)
   
   const cars = snapshot.docs.map(doc => ({
       ...doc.data(), id: doc.id
@@ -39,17 +40,34 @@ export async function fetchCar(id) {
   return car
 }
 
-export async function addCarToDB(name, color, price, user) {
+export async function addCarToDB(name, color, price, image, address, city, state, country, user) {
   try {
       const docRef = await addDoc(collection(db, "orderedCars"), {
           name,
           color,
+          image,
           price,
+          address, 
+          city, 
+          state, 
+          country,
           uid: user.uid
       })
   } catch (error) {
       console.error(error.message)
   }
+
+}
+
+export function fetchOrderedCars(cb) {
+    
+    onSnapshot(orderedCarsRef, (querySnapshot) => {
+        const data = []
+        querySnapshot.forEach((doc) => {
+            data.push(doc.data())
+        })
+        cb(data)
+    })
 
 }
 

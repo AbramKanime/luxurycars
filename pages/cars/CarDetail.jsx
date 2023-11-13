@@ -36,12 +36,23 @@ export default function CarDetail() {
         loadCar()
     }, [])
 
-    function orderCar() {
+    function displayModal() {
+        document.querySelector("#modal").style.display = "block"
+    }
+
+    function completeOrder(e) {
+        e.preventDefault()
+        document.querySelector("#modal").style.display = "none"
+        const address = document.getElementById("address").value
+        const city = document.getElementById("city").value
+        const state = document.getElementById("state").value
+        const country = document.getElementById("country").value
+        document.getElementById("order-form").reset()
+
         const user = auth.currentUser
-        const {name, color, price} = car
-        addCarToDB(name, color, price, user)
-        console.log(user.uid)
-        console.log(car)
+        const {name, color, price, image} = car
+        console.log(name, color, price, image, address, city, state, country)
+        addCarToDB(name, color, price, image, address, city, state, country, user)
     }
 
     if (loading) {
@@ -59,34 +70,46 @@ export default function CarDetail() {
     }
 
     return (
-        <main>
-            <div className="car-detail-container">
-                <Link
-                    to=".."
-                    relative="path"
-                    className="back-button"
-                >&larr; <span>Back to cars</span></Link>
+        <>
+            <main>
+                <div className="car-detail-container">
+                    <Link
+                        to=".."
+                        relative="path"
+                        className="back-button"
+                    >&larr; <span>Back to cars</span></Link>
 
-                <nav className="car-detail-nav">
-                    {car && <img src={car.image} />}
-                    <NavLink
-                        to="."
-                        end
-                        style={({ isActive }) => isActive ? activeStyles : null}
-                    >
-                        Details
-                    </NavLink>
-                    <NavLink
-                        to="photos"
-                        style={({ isActive }) => isActive ? activeStyles : null}
-                    >
-                        Photos
-                    </NavLink>
-                </nav>
+                    <nav className="car-detail-nav">
+                        {car && <img src={car.image} />}
+                        <NavLink
+                            to="."
+                            end
+                            style={({ isActive }) => isActive ? activeStyles : null}
+                        >
+                            Details
+                        </NavLink>
+                        <NavLink
+                            to="photos"
+                            style={({ isActive }) => isActive ? activeStyles : null}
+                        >
+                            Photos
+                        </NavLink>
+                    </nav>
 
-                <Outlet context={{car}} />
-                <button onClick={orderCar} className="link-button">Order this car</button>
+                    <Outlet context={{car}} />
+                    <button onClick={displayModal} className="link-button">Order this car</button>
+                </div>
+            </main>
+            <div className="modal" id="modal">
+                <h3 className="checkout-header">Fill your details</h3>
+                <form onSubmit={completeOrder} id="order-form">
+                    <input id="address" type="text" placeholder="Enter your shipping address" required/>
+                    <input id="city" type="text" placeholder="City" required/>
+                    <input id="state" type="text" placeholder="State" required/>
+                    <input id="country" type="text" placeholder="Country" required/>
+                    <button className="pay-btn" type="submit">Complete order</button>
+                </form>
             </div>
-        </main>
+        </>
     )
 }
