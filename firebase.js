@@ -1,8 +1,11 @@
 import { initializeApp } from "firebase/app"
-import { getFirestore, addDoc, collection, getDocs, onSnapshot } from "firebase/firestore"
+import { getFirestore, addDoc, collection, 
+        getDocs, onSnapshot, serverTimestamp,
+        query, where } from "firebase/firestore"
 import { getAuth, createUserWithEmailAndPassword,
         signInWithEmailAndPassword, updateProfile, onAuthStateChanged,
         signOut } from "firebase/auth"
+import { nanoid } from 'nanoid'
 
 const firebaseConfig = {
   apiKey: "AIzaSyBl4QLRAj0YwANlBbG7igCmUrFo7mlsZV4",
@@ -42,7 +45,7 @@ export async function fetchCar(id) {
 
 export async function addCarToDB(name, color, price, image, address, city, state, country, user) {
   try {
-      const docRef = await addDoc(collection(db, "orderedCars"), {
+      const docRef = await addDoc(orderedCarsRef, {
           name,
           color,
           image,
@@ -51,7 +54,9 @@ export async function addCarToDB(name, color, price, image, address, city, state
           city, 
           state, 
           country,
-          uid: user.uid
+          id: nanoid(),
+          uid: user.uid,
+          createdAt: serverTimestamp()
       })
   } catch (error) {
       console.error(error.message)
@@ -59,9 +64,10 @@ export async function addCarToDB(name, color, price, image, address, city, state
 
 }
 
-export function fetchOrderedCars(cb) {
-    
-    onSnapshot(orderedCarsRef, (querySnapshot) => {
+export function fetchOrderedCars(user, cb) {
+    const q = query(orderedCarsRef, where("uid", "==", user.uid))
+    console.log(user.uid)
+    onSnapshot(q, (querySnapshot) => {
         const data = []
         querySnapshot.forEach((doc) => {
             data.push(doc.data())
@@ -71,6 +77,8 @@ export function fetchOrderedCars(cb) {
 
 }
 
+// Authentication codes
+
 export function authCreateAccountWithEmail(email, password, firstName, lastName, navigate, from) {
 
   createUserWithEmailAndPassword(auth, email, password, firstName, lastName)
@@ -79,17 +87,18 @@ export function authCreateAccountWithEmail(email, password, firstName, lastName,
       })
       .catch((error) => {
           console.error(error.message)
+      }).finally(() => {
+        updateProfile(auth.currentUser, {
+            displayName: firstName,
+            photoURL: null
+        }).then(() => {
+            console.log("Profile updated")
+        }).catch((error) => {
+            console.error(error.message)
+        }).finally(() => {
+            navigate(from, { replace: true })
+        })
       })
-  
-  updateProfile(auth.currentUser, {
-      displayName: firstName,
-      photoURL: null
-  }).then(() => {
-      console.log("Profile updated")
-  }).catch((error) => {
-      console.error(error.message)
-  })
-  navigate(from, { replace: true })
 }
 
 export function authSignInWithEmail(email, password, navigate, setStatus, setError, from) {
@@ -113,8 +122,8 @@ export function authSignOut(navigate) {
 
   signOut(auth)
       .then(() => {
-        
+            
       }).catch((error) => {
-          console.error(error.message)
+            console.error(error.message)
       })
 }

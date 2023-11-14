@@ -8,7 +8,7 @@ export default function CreateAccount() {
 
     const location = useLocation()
     const navigate = useNavigate()
-    const from = location.state?.from || "/myaccount"
+    const from = location.state?.from || "/orders"
 
     function handleChange(e) {
         const { name, value} = e.target

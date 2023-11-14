@@ -1,48 +1,33 @@
 import React, { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-import { onAuthStateChanged, getAuth } from "firebase/auth"
-// import { onSnapshot } from "firebase/firestore"
+import { onAuthStateChanged } from "firebase/auth"
 import { authSignOut, auth, fetchOrderedCars } from "../../firebase"
-
-// let displayName
-// let data
-// onAuthStateChanged(auth, (user) => {
-//   if (user) {
-//     const uid = user.uid
-//     displayName = user.displayName
-//     data = fetchOrderedCars()
-//     // ...
-//   } else {
-//     // User is signed out
-//     // ...
-//   }
-// })
 
 export default function User() {
     const [name, setName] = useState(null)
     const [cars, setCars] = useState([])
-    const [loading, setLoading] = useState(false)
-    const [error, setError] = React.useState(null)
+    const [error, setError] = useState(null)
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
           if (user) {
             const displayName = user.displayName
-            fetchOrderedCars(data => {
+            setName(displayName)
+            fetchOrderedCars(user, data => {
               setCars(data)
-              setName(displayName)
+              // setName(displayName)
             })
           } else {
-            // do something else
+            navigate("/account", {replace: true})
           }
            
         })
     }, [])
-    console.log(cars)
-    console.log(cars.length)
 
     const carsElement = cars.length > 0 ? cars.map(car => {
-      return <div key={car.name} className="ordered-car-container">
+      return <div key={car.id} className="ordered-car-container">
                 <img src={car.image} />
                 <div>
                     <p>{car.name}</p>
@@ -53,7 +38,7 @@ export default function User() {
     }) : <p>You do not have any ordered cars yet...</p>
     
 
-    if (loading) {
+    if (!name) {
         return <h1>Loading...</h1>
     }
 
