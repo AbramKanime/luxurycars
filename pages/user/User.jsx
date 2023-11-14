@@ -29,10 +29,11 @@ export default function User() {
     const carsElement = cars.length > 0 ? cars.map(car => {
       return <div key={car.id} className="ordered-car-container">
                 <img src={car.image} />
-                <div>
-                    <p>{car.name}</p>
+                <div className="ordered-car-detail">
+                    <h5>{car.name}</h5>
                     <p>{car.color}</p>
-                    <p>${car.price}</p>
+                    <p>cost: ${car.price}</p>
+                    <h6>status: pending</h6>
                 </div>
             </div>
     }) : <p>You do not have any ordered cars yet...</p>
@@ -48,9 +49,13 @@ export default function User() {
 
     return (
         <main>
-            <h2>Welcome, {name}.</h2>
+          <div className="order-page-container">
+            <div className="welcome-container">
+              <h2>Welcome back, {name}.</h2>
+              <button onClick={authSignOut}>Sign out</button>
+            </div>
             {carsElement}
-            <button onClick={authSignOut}>Sign out</button>
+          </div>
         </main>
     )
 }

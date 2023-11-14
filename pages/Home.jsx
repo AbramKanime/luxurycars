@@ -45,7 +45,7 @@ export default function Home() {
         <section className="featured-cars-section">
           <p className="title">Featured cars</p>
           {featuredCars}
-          <Link to="cars">Explore</Link>
+          <Link to="cars" className="explore-link">View more cars</Link>
         </section>
     </main>
   )

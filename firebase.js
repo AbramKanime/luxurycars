@@ -1,9 +1,9 @@
 import { initializeApp } from "firebase/app"
 import { getFirestore, addDoc, collection, 
         getDocs, onSnapshot, serverTimestamp,
-        query, where } from "firebase/firestore"
+        query, where, orderBy } from "firebase/firestore"
 import { getAuth, createUserWithEmailAndPassword,
-        signInWithEmailAndPassword, updateProfile, onAuthStateChanged,
+        signInWithEmailAndPassword, updateProfile,
         signOut } from "firebase/auth"
 import { nanoid } from 'nanoid'
 
@@ -65,8 +65,8 @@ export async function addCarToDB(name, color, price, image, address, city, state
 }
 
 export function fetchOrderedCars(user, cb) {
-    const q = query(orderedCarsRef, where("uid", "==", user.uid))
-    console.log(user.uid)
+    const q = query(orderedCarsRef, where("uid", "==", user.uid), orderBy("createdAt"))
+    
     onSnapshot(q, (querySnapshot) => {
         const data = []
         querySnapshot.forEach((doc) => {

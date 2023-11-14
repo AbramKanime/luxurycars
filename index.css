@@ -17,14 +17,14 @@ button {
     cursor: pointer;
 }
 
-header {
-    /* height: 100px; */
+.header-logo {
     display: flex;
     align-items: center;
     padding: 1.5rem 0.5rem;
     justify-content: space-between;
     color: #fff7ed;
     background: #1C1C1C;
+    padding: 2rem 0.5rem;
 }
 
 a {
@@ -39,31 +39,16 @@ header .site-logo {
 
 header nav {
     display: flex;
+    justify-content: space-around;
     gap: 5px;
+    background-color: #FFFFFF;
+    padding: 10px;
 }
 
 header a:hover, .active-link {
     color: #ffc300;
     text-decoration: underline;
     font-weight: 600;
-}
-
-.nav-bar nav {
-    display: flex;
-    flex-direction: column;
-    display: none;
-    /* background-color: #FFEAD0;
-    width: 100px;
-    color: #1C1C1C;
-    padding: 10px;
-    text-align: center;
-    display: none; */
-}
-
-.nav-bar {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
 }
 
 footer {
@@ -108,13 +93,38 @@ footer {
 }
 
 .featured-cars-section .title {
-    height: 30px;
-    background-color: #FFEAD0;
+    background-color: #1C1C1C;
+    color: white;
     display: flex;
     justify-content: center;
     align-items: center;
     font-weight: 600;
-    
+    padding-block: .70rem;
+}
+
+.explore-link {
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    background-color: #1C1C1C;
+    border: none;
+    width: 100%;
+    margin-top: 27px;
+    padding-block: .75rem;
+    color: white;
+    font-weight: 700;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform .1s ease-in-out;
+}
+
+.explore-link:hover, .link-button:hover,
+.complete-order-btn:hover, button:hover {
+    transform: translate(1px, 1px);
+}
+
+.explore-link:hover {
+    text-decoration: underline;
 }
 
 /*** ABOUT PAGE ***/
@@ -164,7 +174,6 @@ footer {
 }
 
 .login-container {
-    /* max-width: var(--maximum-width); */
     width: 100%;
     margin: 20px auto;
     height: 100%;
@@ -455,14 +464,57 @@ input::-ms-input-placeholder { /* Microsoft Edge */
     margin: 0 24px;
 }
 
+/* Order page */
+
+.welcome-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.welcome-container button {
+    border: none;
+    padding: 8px 5px;
+    background-color: #E17654;
+    color: #f5ebe0;
+    border-radius: 5px;
+    width: 100px;
+    /* font-size: 12px; */
+}
+
+.order-page-container {
+    padding: 25px 20px;
+}
+
 .ordered-car-container {
     display: flex;
-    gap: 10px;
+    gap: 15px;
+    align-items: center;
+    margin-bottom: 10px;
+    background-color: #FFFFFF;
 }
 
 .ordered-car-container img {
-    width: 50px;
-    height: 50px;
+    width: 100px;
+    height: 100px;
+}
+
+.ordered-car-detail p, .ordered-car-detail h5, .ordered-car-detail h6 {
+    margin: 0;
+}
+
+.ordered-car-detail p {
+    font-style: italic;
+}
+
+.ordered-car-detail h6 {
+    color: #ffc300;
+}
+
+.ordered-car-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
 

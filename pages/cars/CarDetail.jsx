@@ -51,7 +51,6 @@ export default function CarDetail() {
 
         const user = auth.currentUser
         const {name, color, price, image} = car
-        console.log(name, color, price, image, address, city, state, country)
         addCarToDB(name, color, price, image, address, city, state, country, user)
     }
 
@@ -107,7 +106,7 @@ export default function CarDetail() {
                     <input id="city" type="text" placeholder="City" required/>
                     <input id="state" type="text" placeholder="State" required/>
                     <input id="country" type="text" placeholder="Country" required/>
-                    <button className="pay-btn" type="submit">Complete order</button>
+                    <button className="complete-order-btn" type="submit">Complete order</button>
                 </form>
             </div>
         </>
