@@ -20,6 +20,7 @@ export const auth = getAuth(app)
 
 const carsRef = collection(db, "cars")
 const orderedCarsRef = collection(db, "orderedCars")
+const messageRef = collection(db, "messages")
 const snapshot = await getDocs(carsRef)
 
 
@@ -32,8 +33,6 @@ export async function fetchCarsFromDB() {
 }
 
 export async function fetchCar(id) {
-  // const q = query(carsRef, where(doc.id, "==", id))
-  // const snapshot = await getDocs(carsRef)
   const selectedCar = snapshot.docs.filter(doc => id === doc.id)
 
   const car = selectedCar.map(doc => ({
@@ -61,8 +60,23 @@ export async function addCarToDB(name, color, price, image, address, city, state
   } catch (error) {
       console.error(error.message)
   }
-
 }
+
+export async function addMessageToDB(name, email, subject, message, user) {
+    try {
+        const docRef = await addDoc(messageRef, {
+            name,
+            email,
+            subject,
+            message,
+            id: nanoid(),
+            uid: user.uid,
+            createdAt: serverTimestamp()
+        })
+    } catch (error) {
+        console.error(error.message)
+    }
+  }
 
 export function fetchOrderedCars(user, cb) {
     const q = query(orderedCarsRef, where("uid", "==", user.uid), orderBy("createdAt"))

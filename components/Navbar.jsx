@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom"
 export default function Navbar() {
     console.log('rendered')
     return (
-        <nav id="nav">
+        <nav id="nav" className="nav">
             <NavLink 
                 to="/"
                 className={({isActive}) => isActive ? "active-link" : ""}

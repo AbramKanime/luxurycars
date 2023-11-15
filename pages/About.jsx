@@ -35,7 +35,7 @@ export default function About() {
             <h2>We don't just sell luxury cars; we define them.<br />
             Join us on a journey that celebrates the art of driving, the allure of craftsmanship, 
             and the pursuit of perfection.</h2>
-            <Link className="link-button" to="/cars">Explore our cars</Link>
+            <Link className="link-button" to="/cars">Explore our cars collection</Link>
         </div>
       </div>
     </main>

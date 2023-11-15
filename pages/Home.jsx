@@ -37,14 +37,17 @@ export default function Home() {
     <main>
         <section className="home-container">
           <h1>Unleash Luxury, Embrace Elegance: Your Journey Begins Here!</h1>
-            <p>At LuxuryCars, we invite you to explore a world of automotive excellence where sophistication meets innovation. 
+          <p>At LuxuryCars, we invite you to explore a world of automotive excellence where sophistication meets innovation. 
               Our curated collection of premium vehicles represents the epitome of style, power, and prestige. 
               Whether you're a connoisseur of luxury automobiles or embarking on your first journey into 
-              the world of opulence, you've arrived at the right destination.</p>
+              the world of opulence, you've arrived at the right destination.
+          </p>
         </section>
         <section className="featured-cars-section">
           <p className="title">Featured cars</p>
-          {featuredCars}
+          <div className="featured-cars">
+            {featuredCars}
+          </div>
           <Link to="cars" className="explore-link">View more cars</Link>
         </section>
     </main>

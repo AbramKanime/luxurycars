@@ -7,6 +7,7 @@ export default function User() {
     const [name, setName] = useState(null)
     const [cars, setCars] = useState([])
     const [error, setError] = useState(null)
+    const [loading, setLoading] = useState(false)
 
     const navigate = useNavigate()
 
@@ -15,9 +16,10 @@ export default function User() {
           if (user) {
             const displayName = user.displayName
             setName(displayName)
+            setLoading(true)
             fetchOrderedCars(user, data => {
               setCars(data)
-              // setName(displayName)
+              setLoading(false)
             })
           } else {
             navigate("/account", {replace: true})
@@ -27,20 +29,23 @@ export default function User() {
     }, [])
 
     const carsElement = cars.length > 0 ? cars.map(car => {
-      return <div key={car.id} className="ordered-car-container">
-                <img src={car.image} />
+      const {id, image, name, color} = car
+      return <div key={id} className="ordered-car-container">
+                <img src={image} />
                 <div className="ordered-car-detail">
-                    <h5>{car.name}</h5>
-                    <p>{car.color}</p>
-                    <p>cost: ${car.price}</p>
+                    <div>
+                      <h5>{name}</h5>
+                      <p>{color}</p>
+                      <p>Order #{id.slice(-6)}</p>
+                    </div>
                     <h6>status: pending</h6>
                 </div>
             </div>
     }) : <p>You do not have any ordered cars yet...</p>
     
 
-    if (!name) {
-        return <h1>Loading...</h1>
+    if (loading) {
+        return <h3>Loading...</h3>
     }
 
     if (error) {
@@ -54,7 +59,9 @@ export default function User() {
               <h2>Welcome back, {name}.</h2>
               <button onClick={authSignOut}>Sign out</button>
             </div>
-            {carsElement}
+            <div className="ordered-cars">
+              {carsElement}
+            </div>
           </div>
         </main>
     )

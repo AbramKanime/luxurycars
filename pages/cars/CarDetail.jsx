@@ -1,27 +1,32 @@
 import React, { useState, useEffect } from "react"
-import { useParams, Link, Outlet, NavLink } from "react-router-dom"
-import { fetchCar, addCarToDB } from "../../firebase"
-import { onAuthStateChanged, getAuth } from "firebase/auth"
-
-const auth = getAuth()
- 
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    // const uid = user.uid
-    // ...
-  } else {
-    // User is signed out
-    // ...
-  }
-})
+import { useParams, Link, Outlet, NavLink, useNavigate } from "react-router-dom"
+import { fetchCar, addCarToDB, auth } from "../../firebase"
+import { onAuthStateChanged } from "firebase/auth"
 
 export default function CarDetail() {
     const [car, setCar] = useState(null)
     const [loading, setLoading] = useState(false)
-    const [error, setError] = React.useState(null)
+    const [error, setError] = useState(null)
+    const [user, setUser] = useState(null)
+    const [details, setDetails] = useState({
+        address: "",
+        city: "",
+        state: "",
+        country: ""
+    })
+
     const params = useParams()
+    const navigate = useNavigate()
 
     useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+              setUser(user)
+            } else {
+              // User is signed out
+              // ...
+            }
+        })
         async function loadCar() {
           setLoading(true)
           try {
@@ -36,6 +41,14 @@ export default function CarDetail() {
         loadCar()
     }, [])
 
+    function handleChange(e) {
+        const {name, value} = e.target
+        setDetails(prevDetails => ({
+            ...prevDetails,
+            [name]: value
+        }))
+    }
+
     function displayModal() {
         document.querySelector("#modal").style.display = "block"
     }
@@ -43,15 +56,16 @@ export default function CarDetail() {
     function completeOrder(e) {
         e.preventDefault()
         document.querySelector("#modal").style.display = "none"
-        const address = document.getElementById("address").value
-        const city = document.getElementById("city").value
-        const state = document.getElementById("state").value
-        const country = document.getElementById("country").value
-        document.getElementById("order-form").reset()
+        const {address, city, state, country} = details
+        document.querySelector("#order-form").reset()
 
-        const user = auth.currentUser
         const {name, color, price, image} = car
         addCarToDB(name, color, price, image, address, city, state, country, user)
+        navigate("/orders")
+    }
+
+    function closeModal() {
+        document.querySelector("#modal").style.display = "none"
     }
 
     if (loading) {
@@ -100,12 +114,35 @@ export default function CarDetail() {
                 </div>
             </main>
             <div className="modal" id="modal">
+                <div className="close-modal-btn-container">
+                    <button onClick={closeModal} className="modal-close-btn" id="modal-close-btn">X</button>
+                </div>
                 <h3 className="checkout-header">Fill your details</h3>
                 <form onSubmit={completeOrder} id="order-form">
-                    <input id="address" type="text" placeholder="Enter your shipping address" required/>
-                    <input id="city" type="text" placeholder="City" required/>
-                    <input id="state" type="text" placeholder="State" required/>
-                    <input id="country" type="text" placeholder="Country" required/>
+                    <input 
+                        name="address" 
+                        type="text"
+                        onChange={handleChange}
+                        value={details.value}
+                        placeholder="Enter your shipping address" required/>
+                    <input 
+                        name="city" 
+                        type="text"
+                        onChange={handleChange}
+                        value={details.value} 
+                        placeholder="City" required/>
+                    <input 
+                        name="state" 
+                        type="text"
+                        onChange={handleChange}
+                        value={details.value} 
+                        placeholder="State" required/>
+                    <input 
+                        name="country" 
+                        type="text"
+                        onChange={handleChange}
+                        value={details.value} 
+                        placeholder="Country" required/>
                     <button className="complete-order-btn" type="submit">Complete order</button>
                 </form>
             </div>

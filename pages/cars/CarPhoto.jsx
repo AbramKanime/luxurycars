@@ -13,7 +13,7 @@ export default function CarInfo() {
       ))
 
     return (
-        <div>    
+        <div className="car-photo-tile-container">    
             {carPhotosElement}
         </div>
     )

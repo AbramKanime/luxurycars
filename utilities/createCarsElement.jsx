@@ -14,7 +14,7 @@ export function CreateCarsElement(cars, path="") {
               </div>
               <div className="car-type-color-div">
                 <p className={`car-type ${car.type} selected`}>{car.type}</p>
-                <p className="car-color">Color: {car.color}</p>
+                <p className="car-color">{car.color}</p>
               </div>
           </Link>
         </div>

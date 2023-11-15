@@ -54,8 +54,7 @@ export default function Cars() {
         {typeFilter && <button 
             onClick={() => setSearchParams({})}
             className="car-type clear-filters"
-        >Clear filter</button>}
-      
+        >Clear filter</button>}     
       </div>
       <div className="car-list-container">
         {allCars}
