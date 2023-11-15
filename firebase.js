@@ -21,25 +21,25 @@ export const auth = getAuth(app)
 const carsRef = collection(db, "cars")
 const orderedCarsRef = collection(db, "orderedCars")
 const messageRef = collection(db, "messages")
-const snapshot = await getDocs(carsRef)
 
 
 export async function fetchCarsFromDB() {
-  
-  const cars = snapshot.docs.map(doc => ({
-      ...doc.data(), id: doc.id
-  }))
-  return cars
+    const snapshot = await getDocs(carsRef)
+    const cars = snapshot.docs.map(doc => ({
+        ...doc.data(), id: doc.id
+    }))
+    return cars
 }
 
 export async function fetchCar(id) {
-  const selectedCar = snapshot.docs.filter(doc => id === doc.id)
+    const snapshot = await getDocs(carsRef)
+    const selectedCar = snapshot.docs.filter(doc => id === doc.id)
 
-  const car = selectedCar.map(doc => ({
-    ...doc.data(), id: doc.id
-  }))
-  
-  return car
+    const car = selectedCar.map(doc => ({
+        ...doc.data(), id: doc.id
+    }))
+    
+    return car
 }
 
 export async function addCarToDB(name, color, price, image, address, city, state, country, user) {

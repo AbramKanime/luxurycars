@@ -185,6 +185,10 @@ footer {
 
 /* Login page */
 
+.car-detail-nav {
+    padding: 10px;
+}
+
 .account-container {
     margin: 10px 0;
 }
