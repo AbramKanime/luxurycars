@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 
-export function CreateCarsElement(cars, path="") {
+export default function CreateCarsElement(cars, path="") {
     const carsElement = cars.map(car => (
         <div key={car.id} className="car-tile">
           <Link

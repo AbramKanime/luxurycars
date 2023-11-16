@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { fetchCarsFromDB } from "../firebase"
-import { CreateCarsElement } from "./CreateCarsElement"
+import CreateCarsElement from "./CreateCarsElement"
 
 export default function CarsFromDb() {
     const [cars, setCars] = useState([])

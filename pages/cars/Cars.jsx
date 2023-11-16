@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { useSearchParams } from "react-router-dom"
 import { fetchCarsFromDB } from "../../firebase"
-import { CreateCarsElement } from "../../utilities/CreateCarsElement"
+import CreateCarsElement from "../../utilities/CreateCarsElement"
 
 export default function Cars() {
   const [cars, setCars] = useState([])
@@ -54,7 +54,8 @@ export default function Cars() {
         {typeFilter && <button 
             onClick={() => setSearchParams({})}
             className="car-type clear-filters"
-        >Clear filter</button>}     
+        >Clear filter</button>}
+      
       </div>
       <div className="car-list-container">
         {allCars}
