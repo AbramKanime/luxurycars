@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react"
+import React from "react"
 import { NavLink } from "react-router-dom"
 
 export default function Navbar() {
-    console.log('rendered')
     return (
         <nav id="nav" className="nav">
             <NavLink 

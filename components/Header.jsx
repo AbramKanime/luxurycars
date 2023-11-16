@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { Link, NavLink } from "react-router-dom"
 import { FaBars } from "react-icons/fa"
-import Navbar from "./NavBar"
+import Navbar from "./Navbar"
 
 export default function Header() {
     const [on, setOn] = useState(false)
