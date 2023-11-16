@@ -29,7 +29,7 @@ export default function Cars() {
   const displayedCars = typeFilter ? cars.filter(car => car.type === typeFilter)
                         : cars
 
-  const carsElement = cars.map(car => (
+  const carsElement = displayedCars.map(car => (
         <div key={car.id} className="car-tile">
           <Link
               to={car.id}
