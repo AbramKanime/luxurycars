@@ -1,37 +1,11 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, Suspense } from "react"
 import {Link} from "react-router-dom"
-import { fetchCarsFromDB } from "../firebase"
-import { CreateCarsElement } from "../utilities/CreateCarsElement"
+
+const CarsFromDb = React.lazy(() => {
+  return import("../utilities/CarsFromDb")
+})
 
 export default function Home() {
-  const [cars, setCars] = useState([])
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = React.useState(null)
-
-  useEffect(() => {
-    async function loadCars() {
-      setLoading(true)
-      try {
-        const allCars = await fetchCarsFromDB()
-        const featuredCars = []
-        for (let i = 0; i < 3; i++) {
-          featuredCars.push(allCars[i])
-        }
-        setCars(featuredCars)
-      } catch (error) {
-        setError(error.message)
-      } finally {
-        setLoading(false)
-      }
-    }
-    loadCars()
-  }, [])
-
-  const carsElement = CreateCarsElement(cars, 'cars/')
-
-  const featuredCars = loading ? <h3>Loading featured cars...</h3>
-  : error ? <h3>There was an error: {error.message}</h3>
-  : carsElement
 
   return (
     <main>
@@ -45,9 +19,11 @@ export default function Home() {
         </section>
         <section className="featured-cars-section">
           <p className="title">Featured cars</p>
-          <div className="featured-cars">
-            {featuredCars}
-          </div>
+          <Suspense fallback={<h4>Loading...</h4>}>
+            <div className="featured-cars">
+              <CarsFromDb />
+            </div>
+          </Suspense>
           <Link to="cars" className="explore-link">View more cars</Link>
         </section>
     </main>
