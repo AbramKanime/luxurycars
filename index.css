@@ -223,7 +223,7 @@ input, .login-btns {
 }
 
 .google-button {
-    width: 39%;
+    width: 80%;
 }
 
 input:focus, button:focus {
@@ -642,6 +642,10 @@ form input {
     .modal form {
         max-width: 500px;
     }
+
+    .google-button {
+        width: 39%;
+    }
 }
 
 @media (min-width: 769px) {
@@ -717,5 +721,9 @@ form input {
         background-color: unset;
         display: flex;
         gap: 20px;
+    }
+
+    .google-button {
+        width: 39%;
     }
 }
