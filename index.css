@@ -223,7 +223,7 @@ input, .login-btns {
 }
 
 .google-button {
-    width: 80%;
+    width: 90%;
 }
 
 input:focus, button:focus {
@@ -644,7 +644,7 @@ form input {
     }
 
     .google-button {
-        width: 39%;
+        width: 60%;
     }
 }
 
