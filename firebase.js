@@ -4,7 +4,7 @@ import { getFirestore, addDoc, collection,
         query, where, orderBy } from "firebase/firestore"
 import { getAuth, createUserWithEmailAndPassword,
         signInWithEmailAndPassword, updateProfile,
-        signOut } from "firebase/auth"
+        signOut, GoogleAuthProvider, signInWithPopup } from "firebase/auth"
 import { nanoid } from 'nanoid'
 
 const firebaseConfig = {
@@ -17,6 +17,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig)
 const db = getFirestore(app)
 export const auth = getAuth(app)
+const provider = new GoogleAuthProvider()
 
 const carsRef = collection(db, "cars")
 const orderedCarsRef = collection(db, "orderedCars")
@@ -138,6 +139,17 @@ export function authSignOut(navigate) {
       .then(() => {
             
       }).catch((error) => {
-            console.error(error.message)
+            
       })
+}
+
+export function authSignInWithGoogle(setError) {
+    signInWithPopup(auth, provider)
+        .then(() => {
+            
+        }).catch((error) => {
+            // Handle Errors here.
+            console.log(error.message)
+            setError({message: "Google authentication failed"})
+        })
 }
