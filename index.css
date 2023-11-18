@@ -55,6 +55,14 @@ header a:hover, .active-link {
     display: none;
 }
 
+.nav {
+    display: flex;
+    gap: 5px;
+    background-color: #FFFFFF;
+    padding: 10px;
+    flex-direction: column;
+}
+
 /* Footer */
 
 footer {
