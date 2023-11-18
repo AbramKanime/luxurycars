@@ -61,6 +61,9 @@ header a:hover, .active-link {
     background-color: #FFFFFF;
     padding: 10px;
     flex-direction: column;
+    position: fixed;
+    top: 0;
+    z-index: 1;
 }
 
 /* Footer */
