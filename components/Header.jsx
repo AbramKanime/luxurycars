@@ -2,9 +2,10 @@ import React, { useState } from "react"
 import { Link, NavLink } from "react-router-dom"
 import { FaBars } from "react-icons/fa"
 import Navbar from "./Navbar"
+import { MenuContext } from "./Layout"
 
 export default function Header() {
-    const [on, setOn] = useState(false)
+    const {on, setOn} = React.useContext(MenuContext)
 
     function toggle() {
         setOn(prevState => !prevState)
