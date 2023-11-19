@@ -1,8 +1,8 @@
-import React from "react"
+import React, { useEffect} from "react"
 import { Outlet, NavLink } from "react-router-dom"
 import { MenuContext } from "./Layout"
 
-export default function Layout() {
+export default function AccountLayout() {
     const {setOn} = React.useContext(MenuContext)
   
     useEffect(() => {
