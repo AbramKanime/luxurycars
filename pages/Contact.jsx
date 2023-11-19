@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react"
 import { addMessageToDB, auth } from "../firebase"
 import { onAuthStateChanged } from "firebase/auth"
+import { MenuContext } from "../components/Layout"
 
 export default function Contact() {
     const [user, setUser] = useState(null)
@@ -11,6 +12,7 @@ export default function Contact() {
         subject: "",
         message: ""
     })
+    const {setOn} = React.useContext(MenuContext)
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
@@ -21,6 +23,10 @@ export default function Contact() {
                 // ...
             }
         })
+    }, [])
+
+    useEffect(() => {
+        setOn(false)
     }, [])
 
     function handleChange(e) {

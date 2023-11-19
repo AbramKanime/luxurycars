@@ -59,7 +59,7 @@ header a:hover, .active-link {
 
 .nav {
     display: flex;
-    gap: 5px;
+    gap: 10px;
     background-color: #FFFFFF;
     padding: 10px;
     flex-direction: column;

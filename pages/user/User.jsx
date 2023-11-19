@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Suspense } from "react"
 import { onAuthStateChanged } from "firebase/auth"
 import { authSignOut, auth } from "../../firebase"
+import { MenuContext } from "../../components/Layout"
 
 const OrderedCarsFromDb = React.lazy(() => {
   return import("../../utilities/OrderedCarsFromDb")
@@ -8,6 +9,11 @@ const OrderedCarsFromDb = React.lazy(() => {
 
 export default function User() {
     const [name, setName] = useState(null)
+    const {setOn} = React.useContext(MenuContext)
+
+    useEffect(() => {
+      setOn(false)
+    }, [])
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {

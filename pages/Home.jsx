@@ -1,11 +1,17 @@
 import React, { useState, useEffect, Suspense } from "react"
 import {Link} from "react-router-dom"
+import { MenuContext } from "../components/Layout"
 
 const CarsFromDb = React.lazy(() => {
   return import("../utilities/CarsFromDb")
 })
 
 export default function Home() {
+  const {setOn} = React.useContext(MenuContext)
+  
+  useEffect(() => {
+    setOn(false)
+  }, [])
 
   return (
     <main>

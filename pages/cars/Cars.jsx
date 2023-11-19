@@ -2,14 +2,20 @@ import React, { useState, useEffect } from "react"
 import {Link} from "react-router-dom"
 import { useSearchParams } from "react-router-dom"
 import { fetchCarsFromDB } from "../../firebase"
+import { MenuContext } from "../../components/Layout"
 
 export default function Cars() {
   const [cars, setCars] = useState([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = React.useState(null)
+  const {setOn} = React.useContext(MenuContext)
   
   const [searchParams, setSearchParams] = useSearchParams()
   const typeFilter = searchParams.get("type")
+
+  useEffect(() => {
+    setOn(false)
+  }, [])
 
   useEffect(() => {
     async function loadCars() {

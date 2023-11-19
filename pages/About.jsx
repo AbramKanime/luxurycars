@@ -1,8 +1,15 @@
-import React from "react"
+import React, { useEffect} from "react"
 import {Link} from "react-router-dom"
 import bgImage from "../assets/images/background-image.jpeg"
+import { MenuContext } from "../components/Layout"
 
 export default function About() {
+  const {setOn} = React.useContext(MenuContext)
+  
+  useEffect(() => {
+    setOn(false)
+  }, [])
+
   return (
     <main>
       <div className="about-page-container">
