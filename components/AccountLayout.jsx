@@ -1,7 +1,14 @@
 import React from "react"
 import { Outlet, NavLink } from "react-router-dom"
+import { MenuContext } from "./Layout"
 
 export default function Layout() {
+    const {setOn} = React.useContext(MenuContext)
+  
+    useEffect(() => {
+        setOn(false)
+    }, [])
+
     const activeStyles = {
         fontWeight: "bold",
         textDecoration: "underline",
