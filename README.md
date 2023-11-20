@@ -14,7 +14,7 @@ Warning: Vite enforces using jsx syntax inside jsx/tsx files, so it will complai
 - [Prerequisites](#prerequisites)
 - [Usage](#usage)
 - [Development](#development)
-- [acknowledgment](#acknowledgment)
+- [acknowledgments](#acknowledgments)
 
 ## Getting Started
 
