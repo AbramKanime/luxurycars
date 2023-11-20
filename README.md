@@ -7,6 +7,8 @@ For placement of order on any car of interest by the user, they will enter their
 Firebase is used to manage the backend and authentication.
 
 Warning: Vite enforces using jsx syntax inside jsx/tsx files, so it will complain about that. Solution: rename `.js` files to `.jsx` :)
+### Link to live site:
+https://luxurycars-finest.netlify.app/
 
 ## Table of Contents
 
