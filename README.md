@@ -14,7 +14,7 @@ Warning: Vite enforces using jsx syntax inside jsx/tsx files, so it will complai
 - [Prerequisites](#prerequisites)
 - [Usage](#usage)
 - [Development](#development)
-- [Contributing](#acknowledgment)
+- [acknowledgment](#acknowledgment)
 
 ## Getting Started
 
@@ -50,7 +50,6 @@ Your project should now be running at http://localhost:5173/.
 The index.jsx file houses the App component. The App component uses BrowserRouter and Routes {which must first be imported from react-router-dom} to render the pages/components. Below is a snippet of how it was done.
 
 ```markdown
-### Usage
 
 ```jsx
 import React from 'react';
@@ -106,6 +105,8 @@ To contribute to this project, follow these steps:
 ## Acknowledgments
 
 - A special thanks to Scrimba for using some styling from them
+- Shoutout to Ray for helping me fix some bugs
+
 
 ## Author
 #### Abraham Kanime
