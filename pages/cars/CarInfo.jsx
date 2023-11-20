@@ -4,8 +4,6 @@ import { useOutletContext } from "react-router-dom"
 
 export default function CarInfo() {
     const {car} = useOutletContext()
-    console.log(car)
-    // const {type, color, price, name, detail} = car
 
     return (
         <>      

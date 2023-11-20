@@ -87,7 +87,7 @@ export default function CarDetail() {
             <main>
                 <div className="car-detail-container">
                     <Link
-                        to=".."
+                        to="/cars"
                         relative="path"
                         className="back-button"
                     >&larr; <span>Back to cars</span></Link>
