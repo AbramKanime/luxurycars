@@ -39,10 +39,10 @@ To get a local copy up and running follow these simple steps:
 Your project should now be running at http://localhost:5173/.
 
 
-### Prerequisites
+## Prerequisites
 
 ```markdown
-## Prerequisites
+### Prerequisites
 
 - Node.js
 - npm
@@ -53,6 +53,7 @@ Your project should now be running at http://localhost:5173/.
 The index.jsx file houses the App component. The App component uses BrowserRouter and Routes {which must first be imported from react-router-dom} to render the pages/components. Below is a snippet of how it was done.
 
 ```markdown
+### Usage
 
 ```jsx
 import React from 'react';
