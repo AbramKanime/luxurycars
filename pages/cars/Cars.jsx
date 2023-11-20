@@ -35,24 +35,25 @@ export default function Cars() {
   const displayedCars = typeFilter ? cars.filter(car => car.type === typeFilter)
                         : cars
 
-  const carsElement = displayedCars.map(car => (
-        <div key={car.id} className="car-tile">
-          <Link
-              to={car.id}
-              className="car-container"
-          >
-              <img src={car.image} />
-              <div className="car-info">
-                  <h3>{car.name}</h3>
-                  <p>${car.price}</p>
-              </div>
-              <div className="car-type-color-div">
-                <p className={`car-type ${car.type} selected`}>{car.type}</p>
-                <p className="car-color">{car.color}</p>
-              </div>
-          </Link>
-        </div>
-      ))
+  const carsElement = displayedCars.map(car => {
+    const {id, image, name, price, type, color} = car
+    return <div key={id} className="car-tile">
+              <Link
+                  to={id}
+                  className="car-container"
+              >
+                  <img src={image} alt="picture of a car" />
+                  <div className="car-info">
+                      <h3>{name}</h3>
+                      <p>${price}</p>
+                  </div>
+                  <div className="car-type-color-div">
+                    <p className={`car-type ${type} selected`}>{type}</p>
+                    <p className="car-color">{color}</p>
+                  </div>
+              </Link>
+            </div>
+  })
 
   const allCars = loading ? <h3>Loading cars...</h3>
   : error ? <h3>Failed to load cars...</h3>

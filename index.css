@@ -64,12 +64,6 @@ header a:hover, .active-link {
     padding: 10px;
     flex-direction: column;
     align-items: center;
-    /* position: fixed;
-    top: 0;
-    z-index: 1;
-    justify-content: right;
-    width: 100%;
-    margin-top: 85px; */
 }
 
 /* Footer */
@@ -84,7 +78,19 @@ footer {
     align-items: center;
     margin-top: auto;
     font-weight: 500;
+    flex-direction: column;
+    gap: 10px
 }
+
+footer p {
+    margin: 0;
+}
+
+footer .created-by {
+    font-size: 12px;
+}
+
+/* Home page */
 
 .link-button {
     display: inline-block;
@@ -160,7 +166,8 @@ footer {
     text-decoration: underline;
 }
 
-/*** ABOUT PAGE ***/
+/* About page */
+
 .about-hero-image {
     max-width: 100%;
 }
@@ -198,7 +205,6 @@ footer {
     color: white;
     border-radius: 10px;
 }
-/* end */
 
 /* Login page */
 
@@ -263,15 +269,15 @@ input:focus, button:focus {
     font-family: "Inter", sans-serif;
 }
 
-input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-    opacity: 1; /* Firefox */
+input::placeholder {
+    opacity: 1; 
 }
 
-input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+input:-ms-input-placeholder {
     color: var(--grey-color);
 }
 
-input::-ms-input-placeholder { /* Microsoft Edge */
+input::-ms-input-placeholder {
     color: var(--grey-color);
 }
 
@@ -297,7 +303,7 @@ input::-ms-input-placeholder { /* Microsoft Edge */
     color: red;
 }
 
-/* end */
+/* car pages */
 
 .car-list-container {
     display: flex;
@@ -391,7 +397,6 @@ input::-ms-input-placeholder { /* Microsoft Edge */
     width: 90%;
     margin-block: 25px;
     margin: 0 auto 20px;
-    /* flex-direction: column; */
 }
 
 .car-detail-nav a {
@@ -558,7 +563,6 @@ input::-ms-input-placeholder { /* Microsoft Edge */
     color: #f5ebe0;
     border-radius: 5px;
     width: 100px;
-    /* font-size: 12px; */
 }
 
 .order-page-container {
@@ -608,7 +612,7 @@ input::-ms-input-placeholder { /* Microsoft Edge */
 .contact-container form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
     width: 100%;
 }
 
@@ -630,6 +634,11 @@ form input {
     border-radius: 5px;
     color: #1C1C1C;
     font-size: 14px;
+    margin-top: 5px;
+}
+
+form input, form textarea {
+    margin-top: 5px;
 }
 
 

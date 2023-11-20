@@ -27,7 +27,7 @@ export default function OrderedCarsFromDb() {
     const carsElement = cars.length > 0 ? cars.map(car => {
         const {id, image, name, color} = car
         return <div key={id} className="ordered-car-container">
-                  <img src={image} />
+                  <img src={image} alt="picture of a car" />
                   <div className="ordered-car-detail">
                       <div>
                         <h5>{name}</h5>

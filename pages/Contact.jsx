@@ -83,7 +83,9 @@ export default function Contact() {
                             value={details.value}
                             name="message" 
                             rows="5" 
-                            cols="38"></textarea>
+                            cols="38"
+                            required>
+                        </textarea>
                     </div>
                     <button type="submit" className="contact-btn">Submit</button>
                 </form>

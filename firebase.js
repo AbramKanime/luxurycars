@@ -149,7 +149,6 @@ export function authSignInWithGoogle(setError) {
             
         }).catch((error) => {
             // Handle Errors here.
-            console.log(error.message)
             setError({message: "Google authentication failed"})
         })
 }

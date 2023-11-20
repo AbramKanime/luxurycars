@@ -26,24 +26,25 @@ export default function CarsFromDb() {
       loadCars()
     }, [])
   
-    const carsElement = cars.map(car => (
-      <div key={car.id} className="car-tile">
-        <Link
-            to={`cars/${car.id}`}
-            className="car-container"
-        >
-            <img src={car.image} />
-            <div className="car-info">
-                <h3>{car.name}</h3>
-                <p>${car.price}</p>
-            </div>
-            <div className="car-type-color-div">
-              <p className={`car-type ${car.type} selected`}>{car.type}</p>
-              <p className="car-color">{car.color}</p>
-            </div>
-        </Link>
-      </div>
-    ))
+    const carsElement = cars.map(car => {
+      const {id, image, name, price, type, color} = car
+      return  <div key={id} className="car-tile">
+                <Link
+                    to={`cars/${id}`}
+                    className="car-container"
+                >
+                    <img src={image} alt="picture of a car" />
+                    <div className="car-info">
+                        <h3>{name}</h3>
+                        <p>${price}</p>
+                    </div>
+                    <div className="car-type-color-div">
+                      <p className={`car-type ${type} selected`}>{type}</p>
+                      <p className="car-color">{color}</p>
+                    </div>
+                </Link>
+              </div>
+    })
 
     const featuredCars = loading ? <h3>Loading featured cars...</h3>
     : error ? <h3>There was an error: {error}</h3>
