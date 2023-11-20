@@ -39,11 +39,14 @@ To get a local copy up and running follow these simple steps:
 Your project should now be running at http://localhost:5173/.
 
 
-## Prerequisites
+### Prerequisites
 
 ```markdown
+## Prerequisites
+
 - Node.js
 - npm
+
 
 
 ## Usage
