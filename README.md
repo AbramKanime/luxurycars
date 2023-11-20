@@ -41,9 +41,6 @@ Your project should now be running at http://localhost:5173/.
 
 ## Prerequisites
 
-```markdown
-### Prerequisites
-
 - Node.js
 - npm
 
