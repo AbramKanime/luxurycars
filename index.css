@@ -326,6 +326,10 @@ input::-ms-input-placeholder {
     border-radius: 5px;
 }
 
+.car-photo-tile img {
+    height: 180px;
+}
+
 .car-photo-tile-container {
     display: flex;
     gap: 10px;
