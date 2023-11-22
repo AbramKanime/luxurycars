@@ -1,10 +1,11 @@
-import React from "react"
+import React, { useState } from "react"
 import { useNavigate, useLocation } from "react-router-dom"
 import { authCreateAccountWithEmail } from "../firebase"
 
 export default function CreateAccount() {
     const [loginFormData, setLoginFormData] = React.useState({ email: "", password: "", 
     firstName: "", lastName: "" })
+    const [error, setError] = useState(null)
 
     const location = useLocation()
     const navigate = useNavigate()
@@ -21,14 +22,15 @@ export default function CreateAccount() {
     function handleSubmit(e) {
         e.preventDefault()
         const {email, password, firstName, lastName} = loginFormData
-        authCreateAccountWithEmail(email, password, firstName, lastName, navigate, from)
+        authCreateAccountWithEmail(email, password, firstName, lastName, navigate, from, setError)
         document.getElementById("form").reset()
-        // console.log(`${form.value} clicked`)
     }
 
     return (
         <main>
             <div className="login-container">
+                {error?.message && <h3 className="login-error">{error.message}</h3>}
+
                 <form onSubmit={handleSubmit} id="form" className="login-form">
                     <div className="auth-fields-and-buttons">
                         <input 
@@ -36,7 +38,8 @@ export default function CreateAccount() {
                             type="text" 
                             placeholder="First name"
                             onChange={handleChange}
-                            value={loginFormData.value} 
+                            value={loginFormData.value}
+                            required
                         />
                         <input 
                             name="lastName" 
@@ -44,6 +47,7 @@ export default function CreateAccount() {
                             placeholder="Last name"
                             onChange={handleChange}
                             value={loginFormData.value}
+                            required
                         />
                         <input
                             name="email"
@@ -51,6 +55,7 @@ export default function CreateAccount() {
                             placeholder="Email"
                             onChange={handleChange}
                             value={loginFormData.value}
+                            required
                         />
                         <input 
                             name="password" 
@@ -58,6 +63,7 @@ export default function CreateAccount() {
                             placeholder="Password"
                             onChange={handleChange}
                             value={loginFormData.value}
+                            required
                         />
                         
                         <button value="create-acc" className="login-btns">Create Account</button>

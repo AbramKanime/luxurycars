@@ -12,12 +12,13 @@ export default function OrderedCarsFromDb() {
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
           if (user) {
-            setLoading(true)
-            fetchOrderedCars(user, data => {
-              setCars(data)
-              setLoading(false)
-            })
+              setLoading(true)
+              fetchOrderedCars(user, data => {
+                setCars(data)
+                setLoading(false)
+              })
           } else {
+            // User not signed in
             navigate("/account", {replace: true})
           }
            
@@ -37,7 +38,7 @@ export default function OrderedCarsFromDb() {
                       <h6>status: pending</h6>
                   </div>
               </div>
-      }) : <p>You do not have any ordered cars yet...</p>
+      }) : <p>You do not have any ordered car yet...</p>
       
   
     if (loading) {

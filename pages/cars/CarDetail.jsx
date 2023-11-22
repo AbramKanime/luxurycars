@@ -24,7 +24,6 @@ export default function CarDetail() {
               setUser(user)
             } else {
               // User is signed out
-              // ...
             }
         })
         async function loadCar() {
@@ -33,7 +32,7 @@ export default function CarDetail() {
             const selectedCar = await fetchCar(params.id)
             setCar(selectedCar[0])
           } catch (error) {
-            setError(error.message)
+            setError({message: "There was an error loading the car."})
           } finally {
             setLoading(false)
           }
@@ -73,7 +72,7 @@ export default function CarDetail() {
     }
     
     if (error) {
-        return <h1>There was an error!</h1>
+        return <h1>{error.message}</h1>
     }
 
     const activeStyles = {

@@ -34,7 +34,6 @@ export default function Cars() {
 
   const displayedCars = typeFilter ? cars.filter(car => car.type === typeFilter)
                         : cars
-  console.log(cars)
 
   const carsElement = displayedCars.map(car => {
     const {id, image, name, price, type, color} = car

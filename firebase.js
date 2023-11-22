@@ -79,7 +79,7 @@ export async function addMessageToDB(name, email, subject, message, user) {
     }
   }
 
-export function fetchOrderedCars(user, cb) {
+export function fetchOrderedCars(user, callback) {
     const q = query(orderedCarsRef, where("uid", "==", user.uid), orderBy("createdAt"))
     
     onSnapshot(q, (querySnapshot) => {
@@ -87,59 +87,64 @@ export function fetchOrderedCars(user, cb) {
         querySnapshot.forEach((doc) => {
             data.push(doc.data())
         })
-        cb(data)
+        callback(data)
     })
 
 }
 
 // Authentication codes
 
-export function authCreateAccountWithEmail(email, password, firstName, lastName, navigate, from) {
+export function authCreateAccountWithEmail(email, password, firstName, lastName, navigate, from, setError) {
 
   createUserWithEmailAndPassword(auth, email, password, firstName, lastName)
-      .then((userCredential) => {
-          const user = userCredential.user
-      })
-      .catch((error) => {
-          console.error(error.message)
-      }).finally(() => {
+      .then(() => {
+        //   Successfully created
         updateProfile(auth.currentUser, {
-            displayName: firstName,
-            photoURL: null
+            displayName: firstName
         }).then(() => {
-            console.log("Profile updated")
+            // Profile updated
         }).catch((error) => {
-            console.error(error.message)
+            // Failed to update
         }).finally(() => {
-            navigate(from, { replace: true })
+            // navigate(from, { replace: true })
         })
+      })
+      .catch(() => {
+          setError({message: "Failed to create account"})
+      }).finally(() => {
+        // updateProfile(auth.currentUser, {
+        //     displayName: firstName
+        // }).then(() => {
+        //     // Profile updated
+        // }).catch((error) => {
+        //     // Failed to update
+        // }).finally(() => {
+        //     navigate(from, { replace: true })
+        // })
+        navigate(from, { replace: true })
       })
 }
 
 export function authSignInWithEmail(email, password, navigate, setStatus, setError, from) {
   setStatus("submitting")
   signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-          const user = userCredential.user
-          setError(null)
+      .then(() => {
           navigate(from, { replace: true })
-          console.log(user)
       })
-      .catch((error) => {
+      .catch(() => {
           setError({message: "Invalid login details"})
-          console.error(error)
       }).finally(() => {
           setStatus("idle")
       })
 }
 
-export function authSignOut(navigate) {
+export function authSignOut() {
 
   signOut(auth)
       .then(() => {
-            
+        // Successfully signed out  
       }).catch((error) => {
-            
+        // Failed to sign out
       })
 }
 
@@ -147,7 +152,7 @@ export function authSignInWithGoogle(setError) {
     signInWithPopup(auth, provider)
         .then(() => {
             
-        }).catch((error) => {
+        }).catch(() => {
             // Handle Errors here.
             setError({message: "Google authentication failed"})
         })

@@ -19,12 +19,10 @@ export default function User() {
         onAuthStateChanged(auth, (user) => {
           if (user) {
             const displayName = user.displayName
-            const userFirstName = displayName.split(" ")[0]
-            setName(userFirstName)
+            setName(displayName)
           } else {
-            
-          }
-           
+            // User not signed in
+          } 
         })
     }, [])
 

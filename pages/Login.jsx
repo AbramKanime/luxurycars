@@ -48,7 +48,7 @@ export default function Login() {
         <main>
             <div className="login-container">
                 {location.state?.message && <h3 className="login-error">{location.state.message}</h3>}
-                {error ?.message && <h3 className="login-error">{error.message}</h3>}
+                {error?.message && <h3 className="login-error">{error.message}</h3>}
 
                 <div className="google-button">
                     <button onClick={googleAuth} 
