@@ -99,29 +99,18 @@ export function authCreateAccountWithEmail(email, password, firstName, lastName,
   createUserWithEmailAndPassword(auth, email, password, firstName, lastName)
       .then(() => {
         //   Successfully created
-        updateProfile(auth.currentUser, {
-            displayName: firstName
-        }).then(() => {
-            // Profile updated
-        }).catch((error) => {
-            // Failed to update
-        }).finally(() => {
-            // navigate(from, { replace: true })
-        })
       })
       .catch(() => {
           setError({message: "Failed to create account"})
       }).finally(() => {
-        // updateProfile(auth.currentUser, {
-        //     displayName: firstName
-        // }).then(() => {
-        //     // Profile updated
-        // }).catch((error) => {
-        //     // Failed to update
-        // }).finally(() => {
-        //     navigate(from, { replace: true })
-        // })
-        navigate(from, { replace: true })
+        updateProfile(auth.currentUser, {
+            displayName: firstName
+        }).then(() => {
+            // Profile updated
+            navigate(from, { replace: true })
+        }).catch((error) => {
+            // Failed to update
+        })
       })
 }
 
